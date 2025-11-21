@@ -1,6 +1,6 @@
 # https://docs.litellm.ai/docs/proxy/deploy
 
-FROM python:latest
+FROM cgr.dev/chainguard/python:latest-dev
 
 USER root
 WORKDIR /app
@@ -8,6 +8,8 @@ WORKDIR /app
 ENV HOME=/home/litellm
 ENV PATH="${HOME}/venv/bin:$PATH"
 
+RUN apk update && \
+    apk add --no-cache gcc python3-dev openssl openssl-dev
 
 RUN python -m venv ${HOME}/venv
 RUN ${HOME}/venv/bin/pip install --no-cache-dir --upgrade pip
