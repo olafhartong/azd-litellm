@@ -20,6 +20,12 @@ RUN --mount=type=cache,target=${HOME}/.cache/pip \
 
 COPY config.yaml .
 
+# Copy Prisma schema file
+COPY schema.prisma .
+
+# Generate prisma client
+RUN prisma generate
+
 EXPOSE 80/tcp
 
 ENTRYPOINT ["litellm"]
